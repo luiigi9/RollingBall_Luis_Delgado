@@ -27,4 +27,5 @@ public class Ring : MonoBehaviour
         transform.Rotate( rotacion * velocidad * Time.deltaTime );
         
     }
+    
 }

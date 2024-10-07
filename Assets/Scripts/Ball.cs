@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    [SerializeField] int vidas = 100;
     Rigidbody rbB;
 
     Vector3 direccionB = new Vector3 (0f, 0f, 0f);
@@ -22,8 +23,28 @@ public class Ball : MonoBehaviour
             rbB.AddForce(new Vector3(0f, 1f, 0f) * 5, ForceMode.Impulse);
         }
         direccionB.z = v;
-        direccionB.x = h;
-        rbB.AddForce(direccionB.normalized * 2, ForceMode.Force);
+        direccionB.x = h * 2;
+        
 
+    }
+    private void FixedUpdate() //Ciclo pensado para fisicas continuas
+    {
+        rbB.AddForce(direccionB.normalized * 2, ForceMode.Force);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Ring"))
+        {
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("Badnik"))
+        {
+            vidas -= 10;
+            Destroy(other.gameObject);
+            if (vidas <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }
