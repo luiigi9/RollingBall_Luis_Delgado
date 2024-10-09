@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
     [SerializeField] int vidas = 100;
     Rigidbody rbB;
+    int cantidadRings = 0;
+    [SerializeField] TMP_Text textRings;
 
     Vector3 direccionB = new Vector3 (0f, 0f, 0f);
     // Start is called before the first frame update
@@ -36,6 +39,8 @@ public class Ball : MonoBehaviour
         if (other.gameObject.CompareTag("Ring"))
         {
             Destroy(other.gameObject);
+            cantidadRings++;
+            textRings.SetText("Rings: " + cantidadRings);
         }
         if (other.gameObject.CompareTag("Badnik"))
         {
@@ -46,5 +51,6 @@ public class Ball : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        
     }
 }
