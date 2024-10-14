@@ -9,6 +9,8 @@ public class Ball : MonoBehaviour
     Rigidbody rbB;
     int cantidadRings = 0;
     [SerializeField] TMP_Text textRings;
+    [SerializeField] AudioClip sonido;
+    [SerializeField] AudioManager audioManager;
 
     Vector3 direccionB = new Vector3 (0f, 0f, 0f);
     // Start is called before the first frame update
@@ -38,6 +40,7 @@ public class Ball : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ring"))
         {
+            audioManager.ReproducirSonido(sonido);
             Destroy(other.gameObject);
             cantidadRings++;
             textRings.SetText("Rings: " + cantidadRings);
