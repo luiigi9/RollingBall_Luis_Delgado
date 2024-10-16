@@ -25,7 +25,11 @@ public class Ball : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         if (Input.GetKeyDown(KeyCode.Space)) {
-            rbB.AddForce(new Vector3(0f, 1f, 0f) * 5, ForceMode.Impulse);
+            if (DetectarSuelo() == true)
+            {
+                rbB.AddForce(new Vector3(0f, 1f, 0f) * 5, ForceMode.Impulse);
+            }
+            
         }
         direccionB.z = v;
         direccionB.x = h * 2;
@@ -55,5 +59,10 @@ public class Ball : MonoBehaviour
             }
         }
         
+    }
+    bool DetectarSuelo()
+    {
+        bool detectado = true; //= Physics.Raycast();
+        return detectado;
     }
 }
