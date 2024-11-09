@@ -5,7 +5,7 @@ using UnityEngine;
 public class Badnik : MonoBehaviour
 {
     [SerializeField] Vector3 direccion;
-    [SerializeField] int velocidad;
+    [SerializeField] float velocidad;
     float timer = 0;
     // Start is called before the first frame update
     void Start()
@@ -18,9 +18,9 @@ public class Badnik : MonoBehaviour
     {
         timer += Time.deltaTime;
         transform.Translate(direccion * velocidad * Time.deltaTime);
-        if (timer >= 5)
+        if (timer >= 2)
         {
-            direccion.z = direccion.z * -1;
+            direccion.y = direccion.y * -1;
             timer = 0;
         }
     }

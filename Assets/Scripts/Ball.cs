@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] int vidas = 100;
     Rigidbody rbB;
     int cantidadRings = 0;
     [SerializeField] TMP_Text textRings;
     [SerializeField] AudioClip sonido;
     [SerializeField] AudioManager audioManager;
+    [SerializeField] int impulseForce;
 
     Vector3 direccionB = new Vector3 (0f, 0f, 0f);
     // Start is called before the first frame update
@@ -51,12 +51,16 @@ public class Ball : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Badnik"))
         {
-            vidas -= 10;
+            cantidadRings -= 10;
             Destroy(other.gameObject);
-            if (vidas <= 0)
+            if (cantidadRings <= 0)
             {
                 Destroy(gameObject);
             }
+        }
+        if (other.gameObject.CompareTag("ImpulsePltfrm"))
+        {
+            rbB.AddForce(new Vector3(0f, 0f, 1f) * impulseForce, ForceMode.Impulse);
         }
         
     }
