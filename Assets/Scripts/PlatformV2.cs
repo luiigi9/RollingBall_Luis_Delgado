@@ -17,8 +17,8 @@ public class PlatformV2 : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        transform.Translate(direccion * 3 * Time.deltaTime, Space.World);
-        if (timer >= 6)
+        transform.Translate(direccion * 2.5f * Time.deltaTime, Space.World);
+        if (timer >= 7)
         {
             direccion.y = direccion.y * -1;
             timer = 0;

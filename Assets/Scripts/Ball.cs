@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class Ball : MonoBehaviour
     [SerializeField] AudioClip sonido;
     [SerializeField] AudioManager audioManager;
     [SerializeField] int impulseForce;
+    [SerializeField] LayerMask layerMask;
+    RaycastHit hit;
+    [SerializeField] private float dectSuelo;
 
     Vector3 direccionB = new Vector3 (0f, 0f, 0f);
     // Start is called before the first frame update
@@ -62,11 +67,22 @@ public class Ball : MonoBehaviour
         {
             rbB.AddForce(new Vector3(0f, 0f, 1f) * impulseForce, ForceMode.Impulse);
         }
+        if (other.gameObject.CompareTag("Final"))
+        {
+            SceneManager.LoadScene(2);
+        }
+        if (other.gameObject.CompareTag("Restart"))
+        { 
+            SceneManager.LoadScene(1);
+        }
         
+
+
     }
     bool DetectarSuelo()
     {
-        bool detectado = true; //= Physics.Raycast();
+
+        bool detectado = Physics.Raycast(transform.position, new Vector3(0, -1, 0) , dectSuelo, layerMask);
         return detectado;
     }
 }
